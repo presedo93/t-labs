@@ -1,0 +1,4 @@
+jupyterlab
+
+# Themes
+jupyterlab_theme_solarized_dark

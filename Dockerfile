@@ -1,8 +1,10 @@
 FROM python:3.10-slim as builder
 
-ADD requirements.txt .
+ARG folder
+
+ADD labs_requirements.txt ${folder}/requirements.txt* ./
 RUN python -m venv /opt/venv && export PATH="/opt/venv/bin:$PATH" && \
-    pip install --no-cache-dir --disable-pip-version-check -r requirements.txt
+    for rq in ./*.txt; do pip install --no-cache-dir --disable-pip-version-check -r $rq; done
 
 FROM python:3.10-slim
 
