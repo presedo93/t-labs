@@ -37,6 +37,16 @@ In the building process, the Dockerfile makes use of **multi-stage build**, in o
 Once the image is built, it is time to run the container:
 
 
-    docker run --rm -it -v $(pwd)/own_folder:/home/researcher/labs -p 8888:8888 t-labs
+    docker run -d -v $(pwd)/own_folder:/home/researcher/labs -p 8888:8888 --name container_name t-labs
 
-As usual, password can be changed using the generated token. User's `own_folder` is mounted in the container's `/home/researcher/labs` so that the changes done in the notebooks are also saved in the host files.
+User's `own_folder` is mounted in the container's `/home/researcher/labs` so that the changes done in the notebooks are also saved in the host files.
+
+    docker logs container_name
+
+Password can be changed using the generated token (using the command above the user can see which is the token) accesing http://address:port. However, the container has to be restarted in order to make the change effective.
+
+    docker container restart container_name
+
+### nth launch
+
+Once done the basic setup in the 1st launch, the user can `start` or `stop` the container with no worries. While the container is not deleted, it will have the setup´'s config stored!
